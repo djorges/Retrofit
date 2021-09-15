@@ -1,13 +1,17 @@
 package com.example.retrofit_example.di
 
+import android.content.Context
+import androidx.room.Room
 import com.ctc.wstx.stax.WstxInputFactory
 import com.example.retrofit_example.data.api.RSSMap
+import com.example.retrofit_example.data.db.ArticleDatabase
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -34,7 +38,18 @@ class RSSModule{
             .build()
             .create(RSSMap::class.java)
     }
+    @Provides
+    @Singleton
+    fun provideDatabase(@ApplicationContext context: Context) : ArticleDatabase {
+        return Room.databaseBuilder(
+            context,
+            ArticleDatabase::class.java,
+            DB_NAME
+        ).build()
+    }
+
     companion object{
         private const val RSS_URL:String = "https://www.pagina12.com.ar/"
+        private const val DB_NAME:String = "database_article"
     }
 }

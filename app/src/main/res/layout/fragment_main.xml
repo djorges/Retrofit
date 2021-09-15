@@ -6,10 +6,10 @@
     <data>
         <variable
             name="channel"
-            type="com.example.retrofit_example.data.model.Channel" />
+            type="com.example.retrofit_example.data.model.ChannelModel" />
         <variable
             name="adapter"
-            type="com.example.retrofit_example.presentation.adapters.ItemAdapter" />
+            type="com.example.retrofit_example.presentation.adapters.MainAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

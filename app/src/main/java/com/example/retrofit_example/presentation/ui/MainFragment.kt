@@ -1,22 +1,22 @@
 package com.example.retrofit_example.presentation.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.retrofit_example.R
+import com.example.retrofit_example.data.model.ArticleModel
 import com.example.retrofit_example.databinding.FragmentMainBinding
 import com.example.retrofit_example.presentation.viewmodel.MainViewModel
 import com.example.retrofit_example.domain.vo.Result
-import com.example.retrofit_example.presentation.adapters.ItemAdapter
+import com.example.retrofit_example.presentation.adapters.MainAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,17 +32,25 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         //Init Observers
-        mainViewModel.getXML.observe(viewLifecycleOwner, { result ->
+        mainViewModel.getChannel.observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    val channel = result.data.channel!!
+
+                    val channel = result.data
+                    val items = channel?.items!!
                     binding.channel = channel
-                    binding.adapter = ItemAdapter(requireContext(), channel.items!!)
+                    binding.adapter = MainAdapter(
+                        requireContext(),
+                        items as MutableList<ArticleModel>,
+                        mainViewModel,
+                        R.menu.menu_main
+                    )
                 }
                 is Result.Failure -> {
                     binding.progressBar.visibility = View.GONE
@@ -51,6 +59,25 @@ class MainFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_actions, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.menu_action_favorites ->{
+                //Go to Favorites
+                val action = MainFragmentDirections.actionMainFragmentToFavoritesFragment()
+                findNavController().navigate(action)
+
+                true
+            }
+            else ->{
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 }
 @BindingAdapter("loadImage")

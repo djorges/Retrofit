@@ -1,6 +1,6 @@
 package com.example.retrofit_example.di
 
-import com.example.retrofit_example.data.datasources.RSSDataSourceImpl
+import com.example.retrofit_example.data.repositories.RSSDataSourceImpl
 import com.example.retrofit_example.data.repositories.RSSRepositoryImpl
 import com.example.retrofit_example.domain.repositories.RSSDataSource
 import com.example.retrofit_example.domain.repositories.RSSRepository

@@ -48,6 +48,16 @@
                 android:maxLines="4"
                 android:text="Content" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/card_btn_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_more_vert_24"/>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
