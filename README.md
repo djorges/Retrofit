@@ -1,9 +1,12 @@
 # Newspaper
 
 ### Resources
+<p align = "center">
+    <img src="https://github.com/djorges/Retrofit/blob/master/app/src/main/res/drawable/recording.gif"  width="300" height="800" />
+</p>
 
 ### Description
-Mobile application that shows a list of news from Página12. When you select an item, it redirects you to the official website of the newspaper. Application developed with Clean Architecture as architecture pattern and MVVM in the presentation layer. For the back-end, Retrofit 2, Dagger Hilt, Room, Coroutines and LiveData were used.
+Mobile application that shows a list of news from Página12. When you select an item from the list, you are redirected to the article on the newspaper's official website. This app was developed with Clean Architecture as architecture pattern and MVVM in the presentation layer. For the back-end, Retrofit 2, Dagger Hilt, Room, Coroutines and LiveData were used.
 In the front-end the Glide, DataBinding and Navigation UI libraries were used.
 
 ### Docs
